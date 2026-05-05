@@ -2,6 +2,12 @@
 
 Electron desktop app template with an Effect backend and React frontend.
 
+## Agent Guidance
+
+Project-specific agent guidance lives in [.agents/AGENTS.md](/abs/path/c:/Users/camat/code/template-02/.agents/AGENTS.md).
+
+Use it as the entry point for repository rules, reusable skills, and agent-specific Markdown definitions.
+
 ## Tech Stack
 
 ### Backend

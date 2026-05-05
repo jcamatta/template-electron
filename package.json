@@ -14,6 +14,7 @@
     "format": "prettier . --write",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "test": "vitest run --pool threads --passWithNoTests",
     "typecheck": "tsc --noEmit",
     "postinstall": "electron-rebuild",
     "prepare": "husky"
@@ -49,6 +50,7 @@
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.59.2",
     "vite": "^8.0.10",
+    "vitest": "^4.1.5",
     "word-wrap": "^1.2.5"
   },
   "dependencies": {

@@ -49,3 +49,5 @@ app.on("activate", () => {
     createWindow();
   }
 });
+
+app.on("will-quit", () => {});

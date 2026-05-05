@@ -1,0 +1,5 @@
+pnpm format
+pnpm lint:fix
+git update-index --again
+pnpm typecheck
+pnpm run --if-present test

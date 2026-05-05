@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "NodeNext",
+    "jsx": "react-jsx",
+    "lib": ["ESNext", "DOM"],
+    "moduleResolution": "NodeNext",
+    "types": ["node"],
+    "ignoreDeprecations": "6.0",
+    "allowJs": false,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "strict": true,
+    "sourceMap": true,
+    "outDir": "dist",
+    "resolveJsonModule": true
+  }
+}

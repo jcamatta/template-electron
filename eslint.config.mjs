@@ -88,6 +88,7 @@ export default defineConfig(
       local: localRulesPlugin,
     },
     rules: {
+      "@typescript-eslint/no-explicit-any": "error",
       "no-undef": "off",
     },
   },

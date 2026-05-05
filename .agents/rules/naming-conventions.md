@@ -28,6 +28,11 @@ Examples:
 - Backend files may use `index.ts` when the parent folder uses `kebab-case`.
 - Backend test files should use `kebab-case.test.ts` or `index.test.ts` when the parent folder uses `kebab-case`.
 
+## Constants
+
+- Constants must use uppercase snake case in the format `WORD_ONE_TWO`.
+- Use this convention for shared constant values such as error codes, endpoint constants, and other fixed identifiers.
+
 Examples:
 
 - `create-user.ts`
@@ -36,3 +41,5 @@ Examples:
 - `session-repository.ts`
 - `calculate-invoice-total.ts`
 - `user-profile:get-by-id`
+- `INVALID_NAME`
+- `USER_PROFILE_GET_BY_ID`

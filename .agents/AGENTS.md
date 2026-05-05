@@ -90,3 +90,5 @@ References:
 - [Test Structure: 3A](./rules/test-3a.md)
 - [Project Architecture](./rules/project-architecture.md)
 - [IPC API Conventions](./rules/ipc-api-conventions.md)
+
+For a step-by-step example of how a typical backend/frontend feature should be added, see `Project Architecture`.

@@ -5,11 +5,13 @@ Follow these conventions for the API contract between backend and frontend over 
 ## Endpoint Naming
 
 - IPC endpoint names must use `kebab-case`.
+- IPC endpoints should follow the shape `<vertical>:<operation>`.
 
 Examples:
 
 - `user-profile:get-by-id`
 - `invoice:create-draft`
+- `ping:send`
 
 ## Response Shape
 

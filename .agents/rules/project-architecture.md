@@ -11,6 +11,14 @@ The backend follows a vertical slice onion architecture.
 - Organize backend code by `verticals`.
 - A vertical groups code that shares the same language, domain, and APIs.
 - Prefer keeping related inbound, core, and outbound code together inside the same vertical.
+- A vertical is close to a bounded context.
+- Keep code in the same vertical when it operates on the same concept, talks the same language, uses the same main objects, and belongs to the same user area.
+- Split code into different verticals when it represents a different domain, uses different language, has different rules, or depends on different integrations.
+
+Good rule:
+
+- same vertical if they operate on the same concept and belong to the same user area
+- different vertical if they represent a different domain with different language, rules, and integrations
 
 ### Layers
 
@@ -75,6 +83,43 @@ For IPC contracts:
 - `ipc-contract` must not import from backend handler files such as `backend/<vertical>/inbound/create-user`
 
 This is a hard rule of the onion architecture.
+
+### Typical Feature Flow
+
+When adding a typical feature that crosses backend and frontend, follow this flow:
+
+1. Add the shared IPC contract in `src/shared/ipc-contract/<feature>.ts`.
+2. Define the endpoint contract there:
+   endpoint, request type, success response type, and error union type.
+3. Add backend `core` code inside the vertical folder.
+4. Keep backend `core` independent from `src/shared`.
+5. Add backend `handler` code in the same vertical.
+6. In the handler, import the IPC contract types, map request data into core input, call core, and map the core result back to the IPC response shape.
+7. Register the handler in `src/backend/register-handlers.ts` using the endpoint from the shared IPC contract.
+8. Expose the typed IPC call through `src/backend/preload.ts` using `window.api.invoke(...)`.
+9. Add a frontend `lib/<feature>.ts` function that calls the shared endpoint through `window.api`.
+10. Add a frontend hook only if the UI needs orchestration such as loading state, translations, React Query, retries, or stateful composition.
+11. Use the hook or the lib function from a Base UI component.
+
+Example:
+
+- `src/shared/ipc-contract/ping.ts`
+- `src/backend/ping/core.ts`
+- `src/backend/ping/handler.ts`
+- `src/backend/register-handlers.ts`
+- `src/frontend/lib/ping.ts`
+- `src/frontend/hooks/usePing.ts`
+- `src/frontend/components/PingPanel.tsx`
+
+Responsibility split:
+
+- `src/shared/ipc-contract/*` defines the transport contract
+- backend `core` defines domain logic
+- backend `handler` adapts IPC input/output to core
+- `register-handlers.ts` binds Electron IPC to handlers
+- frontend `lib` calls the endpoint
+- frontend `hooks` add UI behavior
+- frontend `components` render the UI
 
 ## Frontend
 

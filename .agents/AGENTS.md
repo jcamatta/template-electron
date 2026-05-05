@@ -17,6 +17,10 @@ Do not assume business rules or business behavior. If they are not explicit in t
 
 Analyze the user's indications against the project rules. When a request has tradeoffs, conflicts with the rules, or creates important consequences, state that clearly and provide recommendations or suggestions the user should notice before implementation.
 
+Explain things in simpler, natural language. Prefer clarity over formal or abstract wording.
+
+When proposing a solution or explaining how something works, include at least one concrete example so the user can see how it works in practice.
+
 When discussing an idea, use this frame:
 
 problem, types of solutions, tradeoffs of each solution, recommendation

@@ -93,6 +93,20 @@ export default defineConfig(
     },
   },
   {
+    files: ["**/*.{ts,tsx,mts,cts}"],
+    ignores: ["**/*.d.ts"],
+    rules: {
+      "no-restricted-syntax": [
+        "error",
+        {
+          selector: "TSInterfaceDeclaration",
+          message:
+            "Use `type` by default. `interface` is only allowed in declaration files or when explicitly required.",
+        },
+      ],
+    },
+  },
+  {
     files: ["src/frontend/**/hooks/**/*.{ts,tsx}"],
     rules: {
       "local/filename-hook": "error",
@@ -162,6 +176,49 @@ export default defineConfig(
               group: ["**/outbound/**"],
               message:
                 "Core code must not import outbound code. Respect onion dependency direction.",
+            },
+            {
+              group: [
+                "../shared/**",
+                "../../shared/**",
+                "../../../shared/**",
+                "../../../../shared/**",
+                "src/shared/**",
+              ],
+              message:
+                "Core code must not import root shared IPC contracts. Respect onion dependency direction.",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    files: ["src/shared/**/*.{ts,tsx,mts,cts}"],
+    rules: {
+      "no-restricted-imports": [
+        "error",
+        {
+          patterns: [
+            {
+              group: [
+                "../backend/**",
+                "../../backend/**",
+                "../../../backend/**",
+                "src/backend/**",
+              ],
+              message:
+                "Root shared code must not import backend code. Shared contracts must stay independent.",
+            },
+            {
+              group: [
+                "../frontend/**",
+                "../../frontend/**",
+                "../../../frontend/**",
+                "src/frontend/**",
+              ],
+              message:
+                "Root shared code must not import frontend code. Shared contracts must stay independent.",
             },
           ],
         },

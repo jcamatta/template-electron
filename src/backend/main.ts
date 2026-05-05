@@ -1,6 +1,7 @@
 import { app, BrowserWindow } from "electron";
 import path from "node:path";
 import started from "electron-squirrel-startup";
+import { disposeHandlers, registerHandlers } from "./register-handlers";
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (started) {
@@ -35,6 +36,7 @@ const createWindow = () => {
 };
 
 app.on("ready", () => {
+  registerHandlers();
   createWindow();
 });
 
@@ -50,4 +52,6 @@ app.on("activate", () => {
   }
 });
 
-app.on("will-quit", () => {});
+app.on("will-quit", () => {
+  disposeHandlers();
+});

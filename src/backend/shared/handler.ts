@@ -1,21 +1,6 @@
 import { Effect } from "effect";
+import type { ErrorShape, Result } from "../../shared/ipc-result";
 import { isDomainError } from "./core";
-
-export interface ErrorShape<Context = unknown> {
-  readonly code: string;
-  readonly message: string;
-  readonly context?: Context;
-}
-
-export type Result<Value, Error = ErrorShape> =
-  | {
-      readonly ok: true;
-      readonly value: Value;
-    }
-  | {
-      readonly ok: false;
-      readonly error: Error;
-    };
 
 export const toErrorShape = (error: unknown): ErrorShape => {
   if (isDomainError(error)) {

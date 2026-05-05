@@ -25,10 +25,16 @@ Use shared backend modules for cross-vertical contracts:
 - `src/backend/common/core` for shared core-level types or interfaces
 - `src/backend/common/inbound` for shared inbound IPC contracts such as result and error shapes
 
+Use `src/shared` only for contracts that are shared between backend and frontend:
+
+- `src/shared` is for true cross-boundary contracts such as IPC endpoint contracts
+- do not put frontend-backend shared contracts inside `src/backend/common`
+
 #### Inbound
 
 - inbound files are entry points such as IPC handlers
 - inbound can import `core`
+- inbound can import IPC contracts from `src/shared`
 - inbound must not contain domain logic that belongs in `core`
 
 #### Core
@@ -52,9 +58,21 @@ Use shared backend modules for cross-vertical contracts:
 Dependency direction must be respected.
 
 - `inbound` can depend on `core`
+- `inbound` can depend on `src/shared` contracts
 - `outbound` can depend on `core`
 - `core` must not depend on `inbound`
 - `core` must not depend on `outbound`
+- `core` must not depend on `src/shared` IPC contracts
+- `src/shared` contracts must not depend on backend inbound, backend core, backend outbound, or frontend implementation code
+
+For IPC contracts:
+
+- `ipc-contract` is the shared source of truth for endpoint names and request/response types
+- backend inbound or module code may import from `ipc-contract`
+- preload may import from `ipc-contract`
+- frontend code may consume types that come from preload or shared wrappers built on `ipc-contract`
+- `ipc-contract` must stay dumb and independent
+- `ipc-contract` must not import from backend handler files such as `backend/<vertical>/inbound/create-user`
 
 This is a hard rule of the onion architecture.
 

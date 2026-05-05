@@ -33,6 +33,12 @@ Examples:
 - Constants must use uppercase snake case in the format `WORD_ONE_TWO`.
 - Use this convention for shared constant values such as error codes, endpoint constants, and other fixed identifiers.
 
+## Types
+
+- Use `type` by default for data shapes, IPC contracts, result shapes, and error shapes.
+- Use `interface` only when open extension, declaration merging, or a similar TypeScript-specific need is required.
+- Do not use `interface` by default for plain object data shapes.
+
 Examples:
 
 - `create-user.ts`

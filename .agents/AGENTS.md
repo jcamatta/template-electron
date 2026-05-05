@@ -8,6 +8,18 @@ Repository reference:
 - Effect LLM reference: `https://effect.website/llms.txt`
 - Tailwind CSS documentation reference: use the latest official Tailwind CSS documentation before assuming syntax or behavior
 
+## Required Startup Context
+
+At the start of every session in this repository, read these files before making changes:
+
+1. `README.md`
+2. `.agents/AGENTS.md`
+3. every file in `.agents/rules/`
+
+Treat those files as mandatory project context for the session.
+
+Do not defer reading rule files based on task relevance.
+
 ## Communication
 
 Communicate with the user directly, briefly, and without unnecessary detail.

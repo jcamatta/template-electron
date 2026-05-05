@@ -73,6 +73,81 @@ const localRulesPlugin = {
           hookFolderPattern.test(getParentFolderName(fullPath))),
       "Hook filenames must use the format useHookName.ts or useHookName.tsx.",
     ),
+    "tailwind-v4-preferred-syntax": {
+      meta: {
+        type: /** @type {const} */ ("problem"),
+        docs: {
+          description:
+            "enforce project Tailwind v4 token utilities and preferred data variants",
+        },
+        schema: [],
+      },
+      create(context) {
+        /**
+         * @param {import("estree").Node} node
+         * @param {string} value
+         */
+        const reportProblems = (node, value) => {
+          if (value.includes("data-[disabled]:")) {
+            context.report({
+              node,
+              message:
+                "Use `data-disabled:` instead of `data-[disabled]:` in Tailwind v4.",
+            });
+          }
+
+          if (/\b(?:bg|text|border|outline|ring)-\[var\(--/.test(value)) {
+            context.report({
+              node,
+              message:
+                "Do not use arbitrary `var(--token)` utilities when a Tailwind token utility exists. Use classes like `bg-surface-3` instead.",
+            });
+          }
+
+          if (/\bshadow-\[/.test(value)) {
+            context.report({
+              node,
+              message:
+                "Do not use arbitrary shadow utilities by default. Use defined Tailwind utilities or add a proper token first.",
+            });
+          }
+        };
+
+        return {
+          JSXAttribute(node) {
+            if (
+              node.name.type !== "JSXIdentifier" ||
+              node.name.name !== "className"
+            ) {
+              return;
+            }
+
+            if (!node.value) {
+              return;
+            }
+
+            if (
+              node.value.type === "Literal" &&
+              typeof node.value.value === "string"
+            ) {
+              reportProblems(node.value, node.value.value);
+              return;
+            }
+
+            if (
+              node.value.type === "JSXExpressionContainer" &&
+              node.value.expression.type === "TemplateLiteral" &&
+              node.value.expression.expressions.length === 0
+            ) {
+              const value = node.value.expression.quasis
+                .map((part) => part.value.cooked ?? "")
+                .join("");
+              reportProblems(node.value.expression, value);
+            }
+          },
+        };
+      },
+    },
   },
 };
 
@@ -129,6 +204,7 @@ export default defineConfig(
   {
     files: ["src/frontend/**/*.{ts,tsx}"],
     rules: {
+      "local/tailwind-v4-preferred-syntax": "error",
       "no-restricted-syntax": [
         "error",
         {

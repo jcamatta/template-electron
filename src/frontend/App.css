@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-@theme {
+:root {
   --surface-1: #f4f1ea;
   --surface-2: #eae6df;
   --surface-3: #ffffff;
@@ -16,44 +16,53 @@
 
   --overlay: rgb(0 0 0 / 0.3);
 
-  --action-primary: var(--color-accent);
-  --action-secondary: var(--text-secondary);
-  --action-destructive: var(--color-destructive);
-
-  --feedback-success: var(--color-success);
-  --feedback-warning: var(--color-warning);
-  --feedback-error: var(--color-destructive);
-
-  --font-ui: "Inter", sans-serif;
-  --font-editor: "Crimson Pro", serif;
+  --font-ui-family: "Inter", sans-serif;
+  --font-editor-family: "Crimson Pro", serif;
 }
 
-[data-theme="dark"] {
-  --surface-1: #1c1a17;
-  --surface-2: #26231e;
-  --surface-3: #2e2b25;
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface-1: #1c1a17;
+    --surface-2: #26231e;
+    --surface-3: #2e2b25;
 
-  --text-primary: #f0ede6;
-  --text-secondary: #b0a898;
-  --text-muted: #7a7267;
+    --text-primary: #f0ede6;
+    --text-secondary: #b0a898;
+    --text-muted: #7a7267;
 
-  --color-accent: #6b9fd4;
-  --color-destructive: #f87171;
-  --color-success: #4ade80;
-  --color-warning: #fbbf24;
+    --color-accent: #6b9fd4;
+    --color-destructive: #f87171;
+    --color-success: #4ade80;
+    --color-warning: #fbbf24;
+  }
+}
 
-  --action-primary: var(--color-accent);
-  --action-secondary: var(--text-secondary);
-  --action-destructive: var(--color-destructive);
+@theme inline {
+  --color-*: initial;
 
-  --feedback-success: var(--color-success);
-  --feedback-warning: var(--color-warning);
-  --feedback-error: var(--color-destructive);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+
+  --color-action-primary: var(--color-accent);
+  --color-action-secondary: var(--text-secondary);
+  --color-action-destructive: var(--color-destructive);
+
+  --color-feedback-success: var(--color-success);
+  --color-feedback-warning: var(--color-warning);
+  --color-feedback-error: var(--color-destructive);
+
+  --font-ui: var(--font-ui-family);
+  --font-editor: var(--font-editor-family);
 }
 
 @layer base {
   :root {
-    color-scheme: light;
+    color-scheme: light dark;
   }
 
   html,

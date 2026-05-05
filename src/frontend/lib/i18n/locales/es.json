@@ -1,1 +1,10 @@
-{}
+{
+  "ping": {
+    "error": {
+      "emptyMessage": "El mensaje de ping no debe estar vacío."
+    }
+  },
+  "error": {
+    "unknown": "Error de transporte inesperado."
+  }
+}

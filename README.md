@@ -23,7 +23,7 @@ Use it as the entry point for repository rules, reusable skills, and agent-speci
 - React DOM
 - TanStack Query
 - i18next
-- Tailwind CSS
+- Tailwind CSS v4
 - TypeScript
 - Vite
 

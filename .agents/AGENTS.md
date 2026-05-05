@@ -6,6 +6,7 @@ Repository reference:
 
 - [README.md](../README.md)
 - Effect LLM reference: `https://effect.website/llms.txt`
+- Tailwind CSS documentation reference: use the latest official Tailwind CSS documentation before assuming syntax or behavior
 
 ## Communication
 
@@ -29,6 +30,9 @@ When writing code:
 
 - follow the rules in this directory
 - use the existing codebase as the reference for patterns and implementation style
+- do not assume how Tailwind CSS works in this project
+- this project uses Tailwind CSS v4
+- always check the latest Tailwind CSS documentation before using or explaining Tailwind features, utilities, or theme behavior
 
 ## Structure
 

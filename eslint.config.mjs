@@ -255,14 +255,14 @@ export default defineConfig(
             },
             {
               group: [
-                "../shared/**",
-                "../../shared/**",
-                "../../../shared/**",
-                "../../../../shared/**",
-                "src/shared/**",
+                "../contract/**",
+                "../../contract/**",
+                "../../../contract/**",
+                "../../../../contract/**",
+                "src/contract/**",
               ],
               message:
-                "Core code must not import root shared IPC contracts. Respect onion dependency direction.",
+                "Core code must not import root contract IPC modules. Respect onion dependency direction.",
             },
           ],
         },
@@ -270,7 +270,7 @@ export default defineConfig(
     },
   },
   {
-    files: ["src/shared/**/*.{ts,tsx,mts,cts}"],
+    files: ["src/contract/**/*.{ts,tsx,mts,cts}"],
     rules: {
       "no-restricted-imports": [
         "error",
@@ -284,7 +284,7 @@ export default defineConfig(
                 "src/backend/**",
               ],
               message:
-                "Root shared code must not import backend code. Shared contracts must stay independent.",
+                "Root contract code must not import backend code. Shared contracts must stay independent.",
             },
             {
               group: [
@@ -294,7 +294,7 @@ export default defineConfig(
                 "src/frontend/**",
               ],
               message:
-                "Root shared code must not import frontend code. Shared contracts must stay independent.",
+                "Root contract code must not import frontend code. Shared contracts must stay independent.",
             },
           ],
         },

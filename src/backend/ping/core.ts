@@ -1,5 +1,5 @@
 import { Effect } from "effect";
-import { DomainError } from "../shared/core";
+import { DomainError } from "../common/core";
 
 // == DATA ==
 

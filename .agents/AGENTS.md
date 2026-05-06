@@ -38,6 +38,16 @@ When discussing an idea, use this frame:
 
 problem, types of solutions, tradeoffs of each solution, recommendation
 
+## Design Principle
+
+Follow `YAGNI`.
+
+Do not add operations, abstractions, states, or extension points based on hypothetical future needs.
+
+Prefer the smallest API and the fewest moving parts that satisfy the current requirement.
+
+If an operation is not expected to be used by the current design, do not add it yet.
+
 When writing code:
 
 - follow the rules in this directory

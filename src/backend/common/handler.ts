@@ -1,5 +1,5 @@
 import { Effect } from "effect";
-import type { ErrorShape, Result } from "../../shared/ipc-result";
+import type { ErrorShape, Result } from "../../contract/ipc-result";
 import { isDomainError } from "./core";
 
 export const toErrorShape = (error: unknown): ErrorShape => {

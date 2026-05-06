@@ -33,16 +33,16 @@ Use shared backend modules for cross-vertical contracts:
 - `src/backend/common/core` for shared core-level types or interfaces
 - `src/backend/common/inbound` for shared inbound IPC contracts such as result and error shapes
 
-Use `src/shared` only for contracts that are shared between backend and frontend:
+Use `src/contract` only for contracts that are shared between backend and frontend:
 
-- `src/shared` is for true cross-boundary contracts such as IPC endpoint contracts
+- `src/contract` is for true cross-boundary contracts such as IPC endpoint contracts
 - do not put frontend-backend shared contracts inside `src/backend/common`
 
 #### Inbound
 
 - inbound files are entry points such as IPC handlers
 - inbound can import `core`
-- inbound can import IPC contracts from `src/shared`
+- inbound can import IPC contracts from `src/contract`
 - inbound must not contain domain logic that belongs in `core`
 
 #### Core
@@ -66,12 +66,12 @@ Use `src/shared` only for contracts that are shared between backend and frontend
 Dependency direction must be respected.
 
 - `inbound` can depend on `core`
-- `inbound` can depend on `src/shared` contracts
+- `inbound` can depend on `src/contract` contracts
 - `outbound` can depend on `core`
 - `core` must not depend on `inbound`
 - `core` must not depend on `outbound`
-- `core` must not depend on `src/shared` IPC contracts
-- `src/shared` contracts must not depend on backend inbound, backend core, backend outbound, or frontend implementation code
+- `core` must not depend on `src/contract` IPC contracts
+- `src/contract` contracts must not depend on backend inbound, backend core, backend outbound, or frontend implementation code
 
 For IPC contracts:
 
@@ -88,11 +88,11 @@ This is a hard rule of the onion architecture.
 
 When adding a typical feature that crosses backend and frontend, follow this flow:
 
-1. Add the shared IPC contract in `src/shared/ipc-contract/<feature>.ts`.
+1. Add the shared IPC contract in `src/contract/ipc-contract/<feature>.ts`.
 2. Define the endpoint contract there:
    endpoint, request type, success response type, and error union type.
 3. Add backend `core` code inside the vertical folder.
-4. Keep backend `core` independent from `src/shared`.
+4. Keep backend `core` independent from `src/contract`.
 5. Add backend `handler` code in the same vertical.
 6. In the handler, import the IPC contract types, map request data into core input, call core, and map the core result back to the IPC response shape.
 7. Register the handler in `src/backend/register-handlers.ts` using the endpoint from the shared IPC contract.
@@ -103,7 +103,7 @@ When adding a typical feature that crosses backend and frontend, follow this flo
 
 Example:
 
-- `src/shared/ipc-contract/ping.ts`
+- `src/contract/ipc-contract/ping.ts`
 - `src/backend/ping/core.ts`
 - `src/backend/ping/handler.ts`
 - `src/backend/register-handlers.ts`
@@ -113,7 +113,7 @@ Example:
 
 Responsibility split:
 
-- `src/shared/ipc-contract/*` defines the transport contract
+- `src/contract/ipc-contract/*` defines the transport contract
 - backend `core` defines domain logic
 - backend `handler` adapts IPC input/output to core
 - `register-handlers.ts` binds Electron IPC to handlers

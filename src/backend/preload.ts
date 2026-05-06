@@ -1,6 +1,6 @@
 import { contextBridge, ipcRenderer } from "electron";
-import type { IpcContract, IpcResult } from "../shared/ipc-contract";
-import type { WindowApi } from "../shared/window-api";
+import type { IpcContract, IpcResult } from "../contract/ipc-contract";
+import type { WindowApi } from "../contract/window-api";
 
 const invoke = <Endpoint extends keyof IpcContract>(
   endpoint: Endpoint,

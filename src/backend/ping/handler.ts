@@ -1,6 +1,6 @@
 import { Effect } from "effect";
-import { toResult } from "../shared/handler";
-import type { PingInput, PingValue } from "../../shared/ipc-contract/ping";
+import { toResult } from "../common/handler";
+import type { PingInput, PingValue } from "../../contract/ipc-contract/ping";
 import type { PingResult } from "./core";
 import { ping } from "./core";
 
@@ -13,4 +13,10 @@ const toPingValue = (result: PingResult): PingValue => ({
 });
 
 export const pingHandler = (input: PingInput) =>
-  toResult(Effect.map(ping(toPingCommand(input)), toPingValue));
+  toResult(
+    Effect.gen(function* () {
+      const result = yield* ping(toPingCommand(input));
+
+      return toPingValue(result);
+    }),
+  );

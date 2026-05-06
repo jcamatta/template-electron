@@ -79,6 +79,8 @@ Rules:
 
 - Treat `Effect`-based workflows as `actions`, not `calculations`.
 - Keep pure domain logic outside `Effect` when no side effect is required.
+- Prefer the `Effect.gen` pattern for action orchestration in this codebase.
+- Do not default to pipe-based `Effect` orchestration for actions when `Effect.gen` expresses the same flow clearly.
 - Use `Effect` to sequence I/O, dependency access, error handling, and orchestration.
 - Use `Effect` requirements to make dependencies explicit instead of relying on hidden globals or implicit ambient state.
 - Call pure calculations from inside `Effect` pipelines instead of embedding all logic directly in the effect.

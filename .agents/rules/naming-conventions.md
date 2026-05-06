@@ -2,6 +2,12 @@
 
 Follow these naming conventions across the project.
 
+## General
+
+- Prefer singular names over plural names by default.
+- Use plural names only when the code represents a real collection, list, or aggregate container.
+- Prefer names like `user`, `ping-contract`, or `session-repository` when the module or type models a single concept.
+
 ## Frontend
 
 - Components must use `PascalCase` filenames in the format `ComponentName.tsx`.

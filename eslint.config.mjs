@@ -4,6 +4,7 @@ import path from "node:path";
 import js from "@eslint/js";
 import { defineConfig } from "eslint/config";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
+import importPlugin from "eslint-plugin-import";
 import tseslint from "typescript-eslint";
 
 const kebabCaseFilePattern =
@@ -160,10 +161,21 @@ export default defineConfig(
   {
     files: ["**/*.{ts,tsx,mts,cts}"],
     plugins: {
+      import: importPlugin,
       local: localRulesPlugin,
+    },
+    settings: {
+      "import/extensions": [".js", ".jsx", ".ts", ".tsx", ".mts", ".cts"],
+      "import/parsers": {
+        "@typescript-eslint/parser": [".ts", ".tsx", ".mts", ".cts"],
+      },
+      "import/resolver": {
+        typescript: true,
+      },
     },
     rules: {
       "@typescript-eslint/no-explicit-any": "error",
+      "import/no-cycle": ["error", { ignoreExternal: true }],
       "no-undef": "off",
     },
   },
